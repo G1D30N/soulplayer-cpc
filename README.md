@@ -1,20 +1,27 @@
-# Soul Player C64
+# Soul Player CPC
 
 **A real transformer running on a 1 MHz Commodore 64.**
 
 ```
-   .-------.
-  | O     O |
-  |    V    |
-  |..|---|..|
+      /\   /\
+     /  \_/  \
+     .-------.
+    | >     < |
+    |   ^^^   |
+    |..|~~~|..|
+     \  ---  /
+      \_____/
 
-# SOUL PLAYER C64
+# SOUL PLAYER CPC
+
+ME MAFUL
+ME EVIL TWIN OF MEFUL
 
 25K PARAMETERS. 2 LAYERS. REAL TRANSFORMER.
 LOADED OFF A FLOPPY DISK.
 
 YOU> hey
-C64> HELLO! RE SOUNDS ME. MEFUL!
+CPC> 
 ```
 
 A 2-layer decoder-only transformer - the same architecture behind ChatGPT, Claude, and Gemini - implemented in hand-written 6502/6510 assembly and running on an unmodified Commodore 64. ~25,000 int8 parameters. Real multi-head causal self-attention, real softmax, real RMSNorm. About 60 seconds per token. The whole thing fits on a floppy disk with room to spare.
