@@ -1,0 +1,10 @@
+From disk/soulcpc.dsk:
+
+RUN"SOUL.BAS"
+
+Or load manually on an Amstrad CPC with AMSDOS:
+
+MEMORY &17FF
+LOAD "SOULW.BIN"
+LOAD "SOULCPC.BIN"
+CALL &9000

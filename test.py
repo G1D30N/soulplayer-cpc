@@ -369,6 +369,41 @@ def test_build():
     record("Build", 1 if ok else 0, 1)
 
 
+def test_cpc_build():
+    section("Build — assemble CPC binaries from shipped weights")
+    soul = ROOT / "models" / "soul.bin"
+    tok = ROOT / "models" / "tokenizer.json"
+    if not soul.exists() or not tok.exists():
+        print("  SKIP: models/soul.bin or models/tokenizer.json not found")
+        record("CPC Build", 0, 1)
+        return
+
+    import subprocess, tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        r = subprocess.run(
+            [sys.executable, str(ROOT / "src" / "build_cpc.py"),
+             "--soul", str(soul), "--tokenizer", str(tok), "--output", tmp],
+            capture_output=True, text=True)
+        weights = Path(tmp) / "soulw.bin"
+        code = Path(tmp) / "soulcpc.bin"
+        dsk = Path(tmp) / "soulcpc.dsk"
+        loader = Path(tmp) / "soulcpc_loader.txt"
+        ok = (
+            r.returncode == 0
+            and weights.exists() and weights.stat().st_size > 25000
+            and code.exists() and code.stat().st_size > 4000
+            and dsk.exists() and dsk.stat().st_size > 190000
+            and loader.exists()
+        )
+        if ok:
+            print(f"  SOULW.BIN:   {weights.stat().st_size} bytes")
+            print(f"  SOULCPC.BIN: {code.stat().st_size} bytes")
+            print(f"  SOULCPC.DSK: {dsk.stat().st_size} bytes")
+        else:
+            print(f"  CPC build failed:\n{r.stdout}\n{r.stderr}")
+    record("CPC Build", 1 if ok else 0, 1)
+
+
 # ---------------------------------------------------------------------------
 #  MAIN
 # ---------------------------------------------------------------------------
@@ -398,6 +433,7 @@ def main():
         print("\n  (skipping 6502 tests — use without --quick for full suite)")
 
     test_build()
+    test_cpc_build()
 
     # results
     elapsed = time.time() - t0
