@@ -24,7 +24,7 @@ YOU> hey
 CPC> go away! 
 ```
 
-A 2-layer decoder-only transformer - the same architecture behind ChatGPT, Claude, and Gemini - implemented in hand-written 6502/6510 assembly and running on an unmodified Commodore 64. ~25,000 int8 parameters. Real multi-head causal self-attention, real softmax, real RMSNorm. About 60 seconds per token. The whole thing fits on a floppy disk with room to spare.
+A 2-layer decoder-only transformer - the same architecture behind ChatGPT, Claude, and Gemini - implemented in machine-written Z80 assembly and running on an unmodified Amstrad CPC. ~25,000 int8 parameters. Real multi-head causal self-attention, real softmax, real RMSNorm. About 60 seconds per token. The whole thing fits on a floppy disk with room to spare.
 
 ## Architecture
 
