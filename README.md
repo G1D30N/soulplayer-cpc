@@ -1,6 +1,6 @@
 # Soul Player CPC
 
-**A real transformer running on a 1 MHz Commodore 64.**
+**A real transformer running on a 4 MHz Amstrad CPC.**
 
 ```
       /\   /\
@@ -32,7 +32,7 @@ A 2-layer decoder-only transformer - the same architecture behind ChatGPT, Claud
 
 ## Quick start - run the pre-built soul
 
-Grab `disk/soulcpc.dsk` and mount it in any CPC emulator (like caprice32):
+Grab `disk/soulcpc.dsk` and mount it in any CPC emulator (like [https://github.com/ColinPitrat/caprice32] caprice32):
 
 ```
 RUN"SOUL"
