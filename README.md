@@ -21,7 +21,7 @@ ME EVIL TWIN OF MEFUL
 LOADED OFF A FLOPPY DISK.
 
 YOU> hey
-CPC> 
+CPC> go away! 
 ```
 
 A 2-layer decoder-only transformer - the same architecture behind ChatGPT, Claude, and Gemini - implemented in hand-written 6502/6510 assembly and running on an unmodified Commodore 64. ~25,000 int8 parameters. Real multi-head causal self-attention, real softmax, real RMSNorm. About 60 seconds per token. The whole thing fits on a floppy disk with room to spare.
@@ -32,14 +32,13 @@ A 2-layer decoder-only transformer - the same architecture behind ChatGPT, Claud
 
 ## Quick start - run the pre-built soul
 
-Grab `disk/soulplayer.d64` and load it in any C64 emulator ([VICE](https://vice-emu.sourceforge.io/) recommended):
+Grab `disk/soulcpc.dsk` and mount it in any CPC emulator (like caprice32):
 
 ```
-LOAD"SOULPLAYER",8,1
-RUN
+RUN"SOUL"
 ```
 
-Type a short message in lowercase, press RETURN, wait. The border flashes while it thinks. Each token gets a SID blip. A full response takes a few minutes. Type `q` to quit.
+Type a short message in lowercase, press RETURN, wait. The border flashes while it thinks. Each token gets a blip. A full response takes a few minutes. Type `q` to quit.
 
 > **Tip:** The model understands lowercase letters, spaces, and punctuation (`. , ! ? ' : ; -`). Capital letters become unknown tokens.
 
@@ -120,9 +119,10 @@ Tests verify the entire chain: float reference → integer reference → memory-
 ## What's in the repo
 
 ```
-soulplayer-c64/
+soulplayer-cpc/
 ├── train.py              - train a model + export weights
 ├── build.py              - assemble the C64 binary
+├── build_cpc.py          - assemble the CPC binary
 ├── test.py               - run all tests
 ├── soulchat.py           - chat in your terminal
 │
@@ -137,17 +137,20 @@ soulplayer-c64/
 │   └── meful.prg          - original release, raw PRG
 │   ├── soulplayer.d64     - ready-to-run disk image
 │   └── soulplayer.prg     - raw PRG
+│   ├── soulcpc.dsk        - original release, disk image
 └── src/                   - the engine
     ├── numerics.py        - ground truth: fixed-point math + forward pass
     ├── soul_io.py         - .bin weight file format
     ├── shadow.py          - memory-faithful Python shadow of the 6502/6510
     ├── assembler.py       - mini 6502 assembler (labels, patches, far branches)
+    ├── assembler_z80.py   - mini z80 assembler for cpc version (labels, patches, far branches)
     ├── cpu6502.py         - minimal 6502 interpreter for testing
     ├── asm_matvec.py      - 6502 matrix-vector multiply
     ├── asm_rms_norm.py    - 6502 RMSNorm (integer sqrt + divide)
     ├── asm_attn_head.py   - 6502 attention head (LUT softmax)
     ├── asm_simple.py      - 6502 embed, residual, relu, argmax
     └── build.py           - PRG + D64 assembler
+    └── build_cpc.py       - BAS + Z80 assembler
 ```
 
 ## Specs
