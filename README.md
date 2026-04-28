@@ -97,6 +97,21 @@ x64 disk/soulplayer.d64    # VICE emulator
 ```
 
 Or flash the `.d64` to a real 1541 floppy for hardware.
+### Build the CPC binary
+
+```bash
+python build_cpc.py
+```
+
+This assembles all Z80 routines, embeds your trained weights, and writes `disk/soulcpc.asm` and `disk/soulcpc.dsk`.
+
+### Run it
+
+```bash
+cap32 disk/soulcpc.dsk    # caprice emulator
+```
+
+Or flash the `.dsk` to a real floppy for hardware.
 
 ## Chat with the soul locally
 
